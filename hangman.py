@@ -1,36 +1,42 @@
-# version 0.1.5
+# version 0.2.0
+
 import random
+from time import sleep
 
 def get_word():
-    words = ['Apple', 'Bread', 'Chair', 'Dance', 'Eagle', 'Fruit', 'Grape', 'House', 'Ivory', 'Jelly', 
-             'Knife', 'Lemon', 'Mango', 'Night', 'Ocean', 'Peach', 'Queen', 'River', 'Stone', 'Tiger', 
-             'Union', 'Vivid', 'Whale', 'Xenon', 'Yield', 'Zebra', 'Blaze', 'Crane', 'Dream', 'Flame', 
-             'Globe', 'Haven', 'Jolly', 'Kneel', 'Lunar', 'Mirth', 'Noble', 'Orbit', 'Piano', 'Quilt', 
-             'Raven', 'Shine', 'Thorn', 'Unity', 'Valor', 'Waltz', 'Xylog', 'Yacht', 'Zealot', 'Animal',
-             'Banana', 'Castle', 'Dragon', 'Energy', 'Flower', 'Garden', 'Heaven', 'Island', 'Jungle',
-             'Kitten', 'Laptop', 'Monkey', 'Nature', 'Orange', 'Planet', 'Quiver', 'Rocket', 
-             'Sunset', 'Tunnel', 'Umbrella', 'Victory', 'Whisper', 'Xylophone', 'Yellow', 'Zephyr', 
-             'Beacon', 'Canyon', 'Desert', 'Empire', 'Forest', 'Galaxy', 'Harbor', 'Insect', 'Jigsaw', 
-             'Knight', 'Lantern', 'Mystic', 'Nectar', 'Oracle', 'Pirate', 'Quasar', 'Rescue', 'Savage', 
-             'Trophy', 'Utopia', 'Voyage', 'Wander', 'Xenial', 'Yonder', 'Zephyr', 'Adventure', 'Butterfly',
-             'Chocolate', 'Dinosaur', 'Elephant', 'Fireworks', 'Grapefruit', 'Happiness', 'Important', 'Jasmine',
-             'Kangaroo', 'Lighthouse', 'Mountain', 'Notebook', 'Orchestra', 'Pineapple', 'Question', 'Rainbow',
-             'Sunshine', 'Universe', 'Vacation', 'Wonderful', 'Xenophobia', 'Youthful', 'Zoologist', 'Beautiful',
-             'Champion', 'Delicious', 'Enchanted', 'Fantastic', 'Glamorous', 'Harmonize', 'Incredible', 'Joyfulness',
-             'Knowledge', 'Legendary', 'Magnificent', 'Nostalgia', 'Optimistic', 'Phenomenal', 'Quintuple', 'Radiation', 
-             'Spectacle', 'Triumphant', 'Unstoppable', 'Vibrantly', 'Whimsical', 'Xenophile', 'Yearning', 
-             'Zealously'
+    words = ['apple', 'bread', 'chair', 'dance', 'eagle', 'fruit', 'grape', 'house', 'ivory', 'jelly', 
+             'knife', 'lemon', 'mango', 'night', 'ocean', 'peach', 'queen', 'river', 'stone', 'tiger', 
+             'union', 'vivid', 'whale', 'xenon', 'yield', 'zebra', 'blaze', 'crane', 'dream', 'flame', 
+             'globe', 'haven', 'jolly', 'kneel', 'lunar', 'mirth', 'noble', 'orbit', 'piano', 'quilt', 
+             'raven', 'shine', 'thorn', 'unity', 'valor', 'waltz', 'xylog', 'yacht', 'zealot', 'animal',
+             'banana', 'castle', 'dragon', 'energy', 'flower', 'garden', 'heaven', 'island', 'jungle',
+             'kitten', 'laptop', 'monkey', 'nature', 'orange', 'planet', 'quiver', 'rocket', 
+             'sunset', 'tunnel', 'umbrella', 'victory', 'whisper', 'xylophone', 'yellow', 'zephyr', 
+             'beacon', 'canyon', 'desert', 'empire', 'forest', 'galaxy', 'harbor', 'insect', 'jigsaw', 
+             'knight', 'lantern', 'mystic', 'nectar', 'oracle', 'pirate', 'quasar', 'rescue', 'savage', 
+             'trophy', 'utopia', 'voyage', 'wander', 'xenial', 'yonder', 'zephyr', 'adventure', 'butterfly',
+             'chocolate', 'dinosaur', 'elephant', 'fireworks', 'grapefruit', 'happiness', 'important', 'jasmine',
+             'kangaroo', 'lighthouse', 'mountain', 'notebook', 'orchestra', 'pineapple', 'question', 'rainbow',
+             'sunshine', 'universe', 'vacation', 'wonderful', 'xenophobia', 'youthful', 'zoologist', 'beautiful',
+             'champion', 'delicious', 'enchanted', 'fantastic', 'glamorous', 'harmonize', 'incredible', 'joyfulness',
+             'knowledge', 'legendary', 'magnificent', 'nostalgia', 'optimistic', 'phenomenal', 'quintuple', 'radiation', 
+             'spectacle', 'triumphant', 'unstoppable', 'vibrantly', 'whimsical', 'xenophile', 'yearning', 
+             'zealously'
             ]
 
-    return random.choice(words)
+    return random.choice(words).lower()
 
 def display_word(word, guessed_letters):
     return " ".join([letter if letter in guessed_letters else "_" for letter in word])
 
-def get_guess():
+def get_guess(guessed_letters):
     guess = input("Guess a letter: ").lower()
-    while not guess.isalpha() or len(guess) != 1:
-        guess = input("Invalid input. Guess a single letter: ").lower()
+    while not guess.isalpha() or len(guess) != 1 or guess in guessed_letters:
+        if guess in guessed_letters:
+            print("You already guessed that letter. Try a different one.")
+        else:
+            print("Invalid input. Guess a single letter.")
+        guess = input("Guess a letter: ").lower()
     return guess
 
 def display_hangman(tries):
@@ -43,7 +49,54 @@ def display_hangman(tries):
                 |
                 |
         """,
-        # ... (other stages)
+        """
+           ------
+           |    |
+           O    |
+                |
+                |
+                |
+        """,
+        """
+           ------
+           |    |
+           O    |
+           |    |
+                |
+                |
+        """,
+        """
+           ------
+           |    |
+           O    |
+          /|    |
+                |
+                |
+        """,
+        """
+           ------
+           |    |
+           O    |
+          /|\\   |
+                |
+                |
+        """,
+        """
+           ------
+           |    |
+           O    |
+          /|\\   |
+          /     |
+                |
+        """,
+        """
+           ------
+           |    |
+           O    |
+          /|\\   |
+          / \\   |
+                |
+        """
     ]
     print(stages[tries])
 
@@ -56,13 +109,12 @@ def play_hangman():
     while tries < max_tries:
         print(display_word(word_to_guess, guessed_letters))
         print(f"You have {max_tries - tries} attempts remaining.")
-        guess = get_guess()
+        guess = get_guess(guessed_letters)
 
-        if guess in guessed_letters:
-            print("You already guessed that letter. Try a different one.")
-        elif guess in word_to_guess:
+        if guess in word_to_guess:
             guessed_letters.add(guess)
             if set(word_to_guess) <= guessed_letters:
+                sleep(0.5)
                 print(f"Congratulations! You guessed the word: {word_to_guess}")
                 break
         else:
@@ -71,7 +123,10 @@ def play_hangman():
             display_hangman(tries)
 
         if tries == max_tries:
+            sleep(0.5)
             print(f"Game over! The word was: {word_to_guess}")
+    sleep(1)
+    if input("Do you want to play again? (y/n): ").lower() != "n":
+        play_hangman()
 
 play_hangman()
-
