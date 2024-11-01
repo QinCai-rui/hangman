@@ -134,8 +134,8 @@ try:
 except KeyboardInterrupt: 
     print('\nOpps... You just pressed Ctrl+C. Doing so would quit the program.')
 except Exception:
-    print("Something happened. Please try to restart the program. Didn't help? Drop me a line at https://qincai.obl.ong/feedback/ and I will try my best to help.")
+    print("Something happened. Please try to restart the program. Didn't help? Drop me a line at https://qincai.xyz/feedback/ and I will try my best to help.")
 else: 
-    print('Thanks for playing! If you have any feedback or feature requests, please drop me a line at https://qincai.obl.ong/feedback/ and I will consider the request :)')
+    print('Thanks for playing! If you have any feedback or feature requests, please drop me a line at https://qincai.xyz/feedback/ and I will consider the request :)')
     
         
